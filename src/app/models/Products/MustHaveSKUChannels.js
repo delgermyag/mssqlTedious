@@ -1,13 +1,8 @@
-const MustHaveSKU = require("./MustHaveSKU");
-
 module.exports = (sequelize, Sequelize) => {
-    const MustHaveSKUChannel = sequelize.define('MustHaveSKUChannel', {
+    const MustHaveSKUChannels = sequelize.define('MustHaveSKUChannels', {
         MustHaveSKUChannelID: {
             type: Sequelize.INTEGER,
-            references: {
-                model: MustHaveSKU,
-                key: 'MustHaveSKUChannelID'
-            }
+            primaryKey: true
         },
         Name: {
             type: Sequelize.STRING
@@ -20,5 +15,5 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    return MustHaveSKUChannel;
+    return MustHaveSKUChannels;
 };

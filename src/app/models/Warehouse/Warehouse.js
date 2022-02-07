@@ -9,6 +9,10 @@ module.exports = (sequelize, Sequelize) => {
         },
         WarehouseTypeID: {
             type: Sequelize.INTEGER,
+            references: {
+                model: 'WarehouseTypes',
+                key: 'WarehouseTypeID'
+            }
         }
     });
 

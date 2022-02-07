@@ -11,7 +11,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         SaleRepGroupID: {
             type: Sequelize.INTEGER,
-            allowNull: true
+            allowNull: true,
+            // references: {
+            //     model: 'SaleRepGroup',
+            //     key: 'SaleRepGroupID'
+            // }
         },
         ParentSaleRepID: {
             type: Sequelize.INTEGER,

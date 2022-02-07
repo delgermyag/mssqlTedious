@@ -1,7 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
     const Channels = sequelize.define('Channels', {
         ChannelID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            primaryKey: true
         },
         ChannelTypeID: {
             type: Sequelize.INTEGER

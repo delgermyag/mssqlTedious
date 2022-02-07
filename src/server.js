@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 });
 
 const db = require('./app/models');
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
     console.log("Dropping and resyncing DB.");
 });
 
@@ -23,4 +23,4 @@ require('./app/routes/SaleReps')(app);
 require('./app/routes/Tradeshops')(app);
 
 const PORT = 8080;
-app.listen(PORT, "0.0.0.0");
+app.listen(PORT, "0.0.0.0");``

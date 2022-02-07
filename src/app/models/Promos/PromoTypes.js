@@ -1,13 +1,8 @@
-const Promo = require("./Promo");
-
 module.exports = (sequelize, Sequelize) => {
     const PromoTypes = sequelize.define('PromoTypes', {
         PromoTypeID: {
             type: Sequelize.INTEGER,
-            references: {
-                model: Promo,
-                key: 'PromoTypeID'
-            }
+            primaryKey: true
         },
         Name: {
             type: Sequelize.STRING

@@ -1,35 +1,24 @@
-const Products = require("../Products/Products");
-const Promo = require("./Promo");
-
 module.exports = (sequelize, Sequelize) => {
     const PromoProducts = sequelize.define('PromoProducts', {
         ProductID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Products,
+                model: 'Products',
                 key: 'ProductID'
             }
         },
         PromoID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Promo,
+                model: 'Promo',
                 key: 'PromoID'
             }
         },
         StartDate: {
-            type: Sequelize.DATEONLY,
-            references: {
-                model: Promo,
-                key: 'StartDate'
-            }
+            type: Sequelize.DATEONLY
         },
         EndDate: {
-            type: Sequelize.DATEONLY,
-            references: {
-                model: Promo,
-                key: 'EndDate'
-            }
+            type: Sequelize.DATEONLY
         },
         isMust: {
             type: Sequelize.BOOLEAN

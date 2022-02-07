@@ -5,7 +5,11 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true
         },
         ProductGroupID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'ProductGroups',
+                key: 'ProductGroupID'
+            }
         },
         ProductName: {
             type: Sequelize.STRING

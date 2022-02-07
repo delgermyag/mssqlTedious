@@ -1,13 +1,8 @@
-const Channels = require("./Channels");
-
 module.exports = (sequelize, Sequelize) => {
     const ChannelType = sequelize.define('ChannelType', {
         ChannelTypeID: {
             type: Sequelize.INTEGER,
-            references: {
-                model: Channels,
-                key: 'ChannelTypeID'
-            }
+            primaryKey: true
         },
         Name: {
             type: Sequelize.STRING

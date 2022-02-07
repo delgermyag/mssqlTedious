@@ -1,23 +1,20 @@
-const Promo = require("./Promo");
-const Tradeshops = require("../Customers/Tradeshops");
-const Warehouse = require("../Warehouse/Warehouse");
-
 module.exports = (sequelize, Sequelize) => {
     const PromoTradeshops = sequelize.define('PromoTradeshops', {
         ID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            primaryKey: true
         },
         PromoID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Promo,
+                model: 'Promo',
                 key: 'PromoID'
             }
         },
         TradeshopID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Tradeshops,
+                model: 'Tradeshops',
                 key: 'TradeshopID'
             }
         },
@@ -27,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
         WarehouseID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Warehouse,
+                model: 'Warehouse',
                 key: 'WarehouseID'
             }
         }

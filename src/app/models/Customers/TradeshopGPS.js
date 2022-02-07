@@ -1,11 +1,9 @@
-const Tradeshops = require("./Tradeshops");
-
 module.exports = (sequelize, Sequelize) => {
     const TradeshopGPS = sequelize.define('TradeshopGPS', {
         TradeshopID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Tradeshops,
+                model: 'Tradeshops',
                 key: 'TradeshopID'
             }
         },

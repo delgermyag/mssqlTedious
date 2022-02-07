@@ -1,19 +1,16 @@
-const SaleReps = require("../SaleReps/SaleReps");
-const Tradeshops = require("./Tradeshops");
-
 module.exports = (sequelize, Sequelize) => {
     const TradeshopChannels = sequelize.define('TradeshopChannels', {
         ChannelID: {
             type: Sequelize.INTEGER,
             references: {
-                model: SaleReps,
-                key: 'SaleRepID'
+                model: 'Channels',
+                key: 'ChannelID'
             }
         },
         TradeshopID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Tradeshops,
+                model: 'Tradeshops',
                 key: 'TradeshopID'
             }
         }

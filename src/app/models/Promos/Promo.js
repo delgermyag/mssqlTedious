@@ -8,7 +8,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         PromoTypeID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'PromoTypes',
+                key: 'PromoTypeID'
+            }
         },
         Title: {
             type: Sequelize.STRING

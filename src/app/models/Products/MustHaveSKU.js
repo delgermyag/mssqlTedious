@@ -1,15 +1,16 @@
-const Products = require("./Products");
-
 module.exports = (sequelize, Sequelize) => {
     const MustHaveSKU = sequelize.define('MustHaveSKU', {
         MustHaveSKUChannelID: {
             type: Sequelize.INTEGER,
-            primaryKey: true
+            references: {
+                model: 'MustHaveSKUChannels',
+                key: 'MustHaveSKUChannelID'
+            }
         },
         ProductID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Products,
+                model: 'Products',
                 key: 'ProductID'
             }
         },
