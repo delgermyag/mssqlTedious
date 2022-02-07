@@ -33,7 +33,7 @@ exports.findAll = (req, res) => {
     const TradeshopName = req.body.TradeshopName;
     const condition = TradeshopName ? { TradeshopName: { [Op.like]: `%${TradeshopName}%` } } : null;
 
-    SaleRep.findAll({ where: condition }).then(data => {
+    Tradeshops.findAll({ where: condition }).then(data => {
         res.send(data)
     }).catch(err => {
         res.status(500).send({ message: err.message || 'Some error occured while finding Tradeshops.'});
@@ -44,7 +44,7 @@ exports.findOne = (req, res) => {
     const TradeshopID = req.body.TradeshopID;
     const TradeshopName = req.body.TradeshopName
 
-    SaleRep.findByPk(TradeshopID || TradeshopName).then(data => {
+    Tradeshops.findByPk(TradeshopID || TradeshopName).then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({ message: err.message || 'Some error occured while finding the Tradeshop.'});
@@ -54,7 +54,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.body.TradeshopID;
 
-    SaleRep.update(req.body, { where: { id: id } }).then(num => {
+    Tradeshops.update(req.body, { where: { id: id } }).then(num => {
         if(num == 1) {
             res.send({ message: "Updated successfully."});
         } else {
@@ -68,7 +68,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.body.TradeshopID;
 
-    SaleRep.destroy({ where: { id: id } }).then(num => {
+    Tradeshops.destroy({ where: { id: id } }).then(num => {
         if(num == 1) {
             res.send({ message: "Deleted successfully."});
         } else {

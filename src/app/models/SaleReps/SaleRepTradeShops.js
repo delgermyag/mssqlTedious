@@ -7,11 +7,11 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'SaleRepID'
             }
         },
-        TradeShopID: {
+        TradeshopID: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'TradeShops',
-                key: 'TradeShopID'
+                model: 'Tradeshops',
+                key: 'TradeshopID'
             }
         },
         ProductGroupID: {
