@@ -1,19 +1,16 @@
-const Pricelists = require("./Pricelists");
-const Products = require("../Products/Products");
-
 module.exports = (sequelize, Sequelize) => {
     const PricelistsHistory = sequelize.define('PricelistsHistory', {
         PricelistTypeID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Pricelists,
+                model: 'PricelistTypes',
                 key: 'PricelistTypeID'
             }
         },
         ProductID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Products,
+                model: 'Products',
                 key: 'ProductID'
             }
         },
@@ -23,7 +20,7 @@ module.exports = (sequelize, Sequelize) => {
         PricelistDateID :{
             type: Sequelize.INTEGER,
             references: {
-                model: Pricelists,
+                model: 'PricelistDates',
                 key: 'PricelistDateID'
             }
         },

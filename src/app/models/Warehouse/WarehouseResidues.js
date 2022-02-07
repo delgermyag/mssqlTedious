@@ -3,7 +3,7 @@ module.exports = (sequelize, Sequelize) => {
         WarehouseID: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'Warehouse',
+                model: 'Warehouses',
                 key: 'WarehouseID'
             }
         },

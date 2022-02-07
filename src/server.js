@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 });
 
 const db = require('./app/models');
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
     console.log("Dropping and resyncing DB.");
 });
 

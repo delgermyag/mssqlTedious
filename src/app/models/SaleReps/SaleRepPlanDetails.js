@@ -1,22 +1,20 @@
-const SaleRepPlans = require("./SaleRepPlans");
-const Tradeshops = require("../Customers/Tradeshops");
-
 module.exports = (sequelize, Sequelize) => {
     const SaleRepPlanDetails = sequelize.define('SaleRepPlanDetails', {
         ID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            primaryKey: true
         },
         PlanID: {
             type: Sequelize.INTEGER,
             references: {
-                model: SaleRepPlans,
+                model: 'SaleRepPlans',
                 key: 'PlanID'
             }
         },
         TradeshopID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Tradeshops,
+                model: 'Tradeshops',
                 key: 'TradeShopID'
             }
         },

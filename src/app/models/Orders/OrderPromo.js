@@ -1,13 +1,8 @@
-const OrderDetails = require("./OrderDetails");
-
 module.exports = (sequelize, Sequelize) => {
     const OrderPromo = sequelize.define('OrderPromo', {
         OrderPromoID: {
             type: Sequelize.INTEGER,
-            references: {
-                model: OrderDetails,
-                key: 'OrderPromoID'
-            }
+            primaryKey: true
         },
         OrderID: {
             type: Sequelize.INTEGER

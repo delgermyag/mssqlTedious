@@ -1,11 +1,9 @@
-const Activations = require("./Activations");
-
 module.exports = (sequelize, Sequelize) => {
     const ActivationProducts = sequelize.define('ActivationProducts', {
         ActivationID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Activations,
+                model: 'Activations',
                 key: 'ActivationID'
             }
         },

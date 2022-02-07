@@ -4,10 +4,7 @@ module.exports = (sequelize, Sequelize) => {
     const PricelistDate = sequelize.define('PricelistDate', {
         PricelistDateID: {
             type: Sequelize.INTEGER,
-            references: {
-                model: Pricelists,
-                key: 'PricelistDateID'
-            }
+            primaryKey: true
         },
         PricelistDate: {
             type: Sequelize.DATEONLY

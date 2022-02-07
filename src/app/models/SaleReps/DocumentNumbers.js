@@ -1,16 +1,18 @@
-const SaleReps = require("./SaleReps");
-
 module.exports = (sequelize, Sequelize) => {
     const DocumentNumbers = sequelize.define('DocumentNumbers', {
         SaleRepID: {
             type: Sequelize.INTEGER,
             references: {
-                model: SaleReps,
+                model: 'SaleReps',
                 key: 'SaleRepID'
             }
         },
         OperationID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'Operations',
+                key: 'OperationID'
+            }
         },
         NumberPrefix: {
             type: Sequelize.INTEGER

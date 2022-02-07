@@ -12,10 +12,10 @@ module.exports = (sequelize, Sequelize) => {
         SaleRepGroupID: {
             type: Sequelize.INTEGER,
             allowNull: true,
-            // references: {
-            //     model: 'SaleRepGroup',
-            //     key: 'SaleRepGroupID'
-            // }
+            references: {
+                model: 'SaleRepGroups',
+                key: 'SaleRepGroupID'
+            }
         },
         ParentSaleRepID: {
             type: Sequelize.INTEGER,

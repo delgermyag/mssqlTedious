@@ -1,13 +1,8 @@
-const Orders = require("./Orders");
-
 module.exports = (sequelize, Sequelize) => {
     const OrderStatus = sequelize.define('OrderStatus', {
         OrderStatusID: {
             type: Sequelize.INTEGER,
-            references: {
-                model: Orders,
-                key: 'OrderStatusID'
-            }
+            primaryKey: true
         },
         Name: {
             type: Sequelize.INTEGER

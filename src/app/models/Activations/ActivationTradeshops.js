@@ -1,19 +1,16 @@
-const Tradeshops = require("../Customers/Tradeshops");
-const Activations = require("./Activations");
-
 module.exports = (sequelize, Sequelize) => {
     const ActivationTradeshops = sequelize.define('ActivationTradeshops', {
         ActivationID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Activations,
+                model: 'Activations',
                 key: 'ActivationID'
             }
         },
         TradeshopID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Tradeshops,
+                model: 'Tradeshops',
                 key: 'TradeshopID'
             }
         },

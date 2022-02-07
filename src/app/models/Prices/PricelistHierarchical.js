@@ -1,11 +1,9 @@
-const Pricelists = require("./Pricelists");
-
 module.exports = (sequelize, Sequelize) => {
     const PricelistHierarchical = sequelize.define('PricelistHierarchical', {
         PricelistTypeID :{
             type: Sequelize.INTEGER,
             references: {
-                model: Pricelists,
+                model: 'PricelistTypes',
                 key: 'PricelistTypeID'
             }
         },

@@ -1,7 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
     const Activations = sequelize.define('Activations', {
         ActivationID :{
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            primaryKey: true
         },
         ActivationTypeID: {
             type: Sequelize.INTEGER

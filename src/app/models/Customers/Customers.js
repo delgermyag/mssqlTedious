@@ -1,5 +1,3 @@
-const Tradeshops = require("./Tradeshops");
-
 module.exports = (sequelize, Sequelize) => {
     const Customers = sequelize.define('Customers', {
         CustomerID: {

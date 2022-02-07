@@ -1,7 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
-    const Pricelists = sequelize.define('PriceLists', {
+    const Pricelists = sequelize.define('Pricelists', {
         PricelistTypeID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'PricelistTypes',
+                key: 'PricelistTypeID'
+            }
         },
         ProductID: {
             type: Sequelize.INTEGER

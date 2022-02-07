@@ -5,7 +5,11 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true
         },
         ChannelTypeID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'ChannelTypes',
+                key: 'ChannelTypeID'
+            }
         },
         ChannelName: {
             type: Sequelize.STRING

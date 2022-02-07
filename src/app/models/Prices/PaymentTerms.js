@@ -1,7 +1,3 @@
-const PaymentMethods = require("./PaymentMethods");
-const Pricelists = require("./Pricelists");
-const Tradeshops = require("../Customers/Tradeshops");
-
 module.exports = (sequelize, Sequelize) => {
     const PaymentTerms = sequelize.define('PaymentTerms', {
         PaymentTermID: {
@@ -10,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
         TradeshopID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Tradeshops,
+                model: 'Tradeshops',
                 key: 'TradeshopID'
             }
         },
@@ -20,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
         PricelistTypeID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Pricelists,
+                model: 'PricelistTypes',
                 key: 'PricelistTypeID'
             }
         },

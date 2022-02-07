@@ -1,7 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
     const Returns = sequelize.define('Returns', {
         ReturnID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            primaryKey: true
         },
         ReturnNo: {
             type: Sequelize.INTEGER

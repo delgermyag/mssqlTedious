@@ -1,19 +1,16 @@
-const Products = require("../Products/Products");
-const Orders = require("./Orders");
-
 module.exports = (sequelize, Sequelize) => {
     const OrderDetails = sequelize.define('OrderDetails', {
         OrderID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Orders,
+                model: 'Orders',
                 key: 'OrderID'
             }
         },
         ProductID: {
             type: Sequelize.INTEGER,
             references: {
-                model: Products,
+                model: 'Products',
                 key: 'ProductID'
             }
         },

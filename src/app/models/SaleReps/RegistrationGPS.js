@@ -1,11 +1,9 @@
-const SaleReps = require("./SaleReps");
-
 module.exports = (sequelize, Sequelize) => {
     const RegistrationGPS = sequelize.define('RegistrationGPS', {
         SaleRepID: {
             type: Sequelize.INTEGER,
             references: {
-                model: SaleReps,
+                model: 'SaleReps',
                 key: 'SaleRepID'
             }
         },

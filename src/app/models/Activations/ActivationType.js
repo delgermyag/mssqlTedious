@@ -1,13 +1,8 @@
-const Activations = require("./Activations");
-
 module.exports = (sequelize, Sequelize) => {
     const ActivationType = sequelize.define('ActivationType', {
         ActivationTypeID: {
             type: Sequelize.INTEGER,
-            references: {
-                model: Activations,
-                key: 'ActivationTypeID'
-            }
+            primaryKey: true
         },
         Name: {
             type: Sequelize.STRING

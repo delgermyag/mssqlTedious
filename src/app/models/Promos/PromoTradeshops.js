@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
         PromoID: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'Promo',
+                model: 'Promos',
                 key: 'PromoID'
             }
         },
@@ -24,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
         WarehouseID: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'Warehouse',
+                model: 'Warehouses',
                 key: 'WarehouseID'
             }
         }
