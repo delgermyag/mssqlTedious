@@ -40,7 +40,15 @@ module.exports = (sequelize, Sequelize) => {
         Password: {
             type: Sequelize.STRING,
             allowNull: true
+        },
+        deviceid: {
+            type: Sequelize.STRING,
+            allowNull: true
         }
+    }, {
+        timestamps: false,
+        createdAt: false,
+        updatedAt: false
     });
 
     return SaleRep;

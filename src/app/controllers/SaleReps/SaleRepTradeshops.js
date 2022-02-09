@@ -1,37 +1,21 @@
-const db = require('../../models');
-const SaleRepTradeshops = db.SaleRepTradeShops;
-const Op = db.Sequelize.Op;
 
-exports.create = (req, res) => {
-    if(!req.body.SaleRepID) {
-        res.send({ message: "Please enter SalerepID" });
-        return;
-    };
 
-    const salerepTradeshop = {
-        SaleRepID: req.body.SaleRepID,
-        TradeshopID: req.body.TradeshopID,
-        ProductGroupID: req.body.ProductGroupID,
-        UID: req.body.uid,
-        CreatedDate: req.body.CreatedDate
-    };
+exports.findBySaleRep = (req) => {
+    
+    const connection = new Connection(config);
 
-    SaleRepTradeshops.create(salerepTradeshop).then(data => {
-        res.send(data);
-    }).catch(err => {
-        res.status(500).send({ message: err.message });
-    });
-};
-
-exports.findBySaleRep = (req, res) => {
-    const salerep = req.params.SaleRepID;
-
-    SaleRepTradeshops.findAll({ where: {
-        SaleRepID: salerep
+    connection.connect((err) => {
+        if(err) {
+            console.log('Connection failed...');
+            throw err;
         }
-    }).then(data => {
-        res.send(data);
-    }).catch(err => {
-        res.status(500).send({ message: err.message });
     });
+
+    const request = new Request("exec COLA.dbo.SP_SALEREPS", (err) => {
+        if(err) console.log(err);
+    });
+
+    request.addParameter('SaleRepID', TYPES.Int, req.params.SaleRepID);
+
+    connection.execSql(request);
 };

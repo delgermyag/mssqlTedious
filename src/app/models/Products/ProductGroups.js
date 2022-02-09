@@ -1,5 +1,3 @@
-const Products = require("./Products");
-
 module.exports = (sequelize, Sequelize) => {
     const ProductGroups = sequelize.define('ProductGroups', {
         ProductGroupID: {

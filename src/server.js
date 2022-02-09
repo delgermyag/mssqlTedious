@@ -15,12 +15,14 @@ app.get('/', (req, res) => {
 });
 
 const db = require('./app/models');
-db.sequelize.sync().then(() => {
-    console.log("Dropping and resyncing DB.");
+db.sequelize.authenticate().then(() => {
+    console.log("Connected to COLADB.");
+}).catch(err => {
+    console.log('Unable to connect to db.', err);
 });
 
 require('./app/routes/SaleReps')(app);
 require('./app/routes/Tradeshops')(app);
 
 const PORT = 8080;
-app.listen(PORT, "0.0.0.0");``
+app.listen(PORT, "0.0.0.0");

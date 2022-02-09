@@ -1,80 +1,29 @@
+const { QueryTypes } = require('sequelize');
 const db = require('../../models');
 const Tradeshops = db.Tradeshops;
-const Op = db.Sequelize.Op;
-
-exports.create = (req, res) => {
-    if(!req.body.TradeshopName) {
-        res.send({ message: "Please enter a name."});
-        return;
-    };
-
-    const tradeshop = {
-        TradeshopID: req.body.TradeshopID,
-        CustomerID: req.body.CustomerID,
-        TradeshopName: req.body.TradeshopName,
-        Address1: req.body.Address1,
-        Address2: req.body.Address2,
-        Phone: req.body.Phone,
-        isActive: req.body.isActive,
-        CreatedDate: req.body.CreatedDate,
-        UpdatedDate: req.body.UpdatedDate,
-        UID: req.body.uid,
-        MustHaveSKUChannelID: req.body.MustHaveSKUChannelID
-    };
-
-    Tradeshops.create(tradeshop).then(data => {
-        res.send(data)
-    }).catch(err => {
-        res.status(500).send({ message: err.message });
-    });
-};
 
 exports.findAll = (req, res) => {
-    const TradeshopName = req.body.TradeshopName;
-    const condition = TradeshopName ? { TradeshopName: { [Op.like]: `%${TradeshopName}%` } } : null;
 
-    Tradeshops.findAll({ where: condition }).then(data => {
-        res.send(data)
-    }).catch(err => {
-        res.status(500).send({ message: err.message || 'Some error occured while finding Tradeshops.'});
-    });
-};
-
-exports.findOne = (req, res) => {
-    const TradeshopID = req.body.TradeshopID;
-    const TradeshopName = req.body.TradeshopName
-
-    Tradeshops.findByPk(TradeshopID || TradeshopName).then(data => {
+    Tradeshops.findAll().then(data => {
         res.send(data);
     }).catch(err => {
-        res.status(500).send({ message: err.message || 'Some error occured while finding the Tradeshop.'});
+        res.send(500).send({ message: err.message });
     });
 };
 
-exports.update = (req, res) => {
-    const id = req.body.TradeshopID;
+exports.findBySalerep = async (req, res) => {
+    
+    const id = req.body.SaleRepID;
 
-    Tradeshops.update(req.body, { where: { id: id } }).then(num => {
-        if(num == 1) {
-            res.send({ message: "Updated successfully."});
+    const tradeshop = await db.sequelize.query(`exec SP_TRADESHOPS 1, ${id}, '', '', '' `, { type: QueryTypes.SELECT });
+
+    try {
+        if(tradeshop.length != 0) {
+            res.status(200).send(tradeshop);
         } else {
-            res.send({ message: `Can't update Tradeshop with id=${id}.`});
+            res.status(404).json({ message: 'Tradeshops not found. Check Salerep ID.'});
         }
-    }).catch(err => {
-        res.status(500).send({ message: err.message });
-    });
-};
-
-exports.delete = (req, res) => {
-    const id = req.body.TradeshopID;
-
-    Tradeshops.destroy({ where: { id: id } }).then(num => {
-        if(num == 1) {
-            res.send({ message: "Deleted successfully."});
-        } else {
-            res.send({ message: `Can't delete Tradeshop with id=${id}.`});
-        }
-    }).catch(err => {
-        res.status(500).send({ message: err.message });
-    });
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
 };
