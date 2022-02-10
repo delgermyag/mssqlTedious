@@ -15,6 +15,7 @@ exports.findBySaleRep = async (req, res) => {
     try {
         const id = req.body.deviceid;
         const salerep = await db.sequelize.query(`exec COLA.dbo.SP_SALEREPS 1, '', ${id}, '', '' `, { type: QueryTypes.SELECT });
+        
         if(salerep.length != 0) {
             res.status(200).send(salerep);
         } else {
@@ -24,3 +25,19 @@ exports.findBySaleRep = async (req, res) => {
         res.status(500).json({ message: err.message });
     };
 };
+
+exports.idRequest = async (req, res) => {
+    try {
+        const id = req.body.deviceid;
+        const htcode = req.body.htcode;
+        const salerep = await db.sequelize.query(`exec COLA.dbo.SP_SALEREPS 'deviceidreq', '', ${id}, '', ${htcode} `, { type: QueryTypes.INSERT });
+
+        if(salerep[0]){
+            res.status(200).send(salerep);
+        } else {
+            res.status(404).json({ message: 'Salerep not found.' });
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    }
+}

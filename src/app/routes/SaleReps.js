@@ -3,9 +3,8 @@ module.exports = app => {
     const router = require('express').Router();
 
     router.get('/', users.findAll);
-    router.get('/salerep', users.findBySaleRep);
-
-        
+    router.post('/salerep', users.findBySaleRep);
+    router.post('/idrequest', users.idRequest);
 
     app.use('/api/salereps', router);
 };

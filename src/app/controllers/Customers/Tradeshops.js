@@ -15,7 +15,7 @@ exports.findBySalerep = async (req, res) => {
     
     const id = req.body.SaleRepID;
 
-    const tradeshop = await db.sequelize.query(`exec SP_TRADESHOPS 1, ${id}, '', '', '' `, { type: QueryTypes.SELECT });
+    const tradeshop = await db.sequelize.query(`exec COLA.dbo.SP_TRADESHOPS 1, ${id}, '', '', '' `, { type: QueryTypes.SELECT });
 
     try {
         if(tradeshop.length != 0) {

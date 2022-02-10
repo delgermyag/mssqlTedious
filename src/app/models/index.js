@@ -71,6 +71,7 @@ db.PromoTypes = require('./Promos/PromoTypes')(sequelize, Sequelize);
 
 //Salerep Models
 db.SaleReps = require('./SaleReps/SaleReps')(sequelize, Sequelize);
+db.SaleRepDeviceIDreq = require('./SaleReps/SaleRepDeviceIDreq')(sequelize, Sequelize);
 db.SaleRepTradeShops = require('./SaleReps/SaleRepTradeShops')(sequelize, Sequelize);
 db.SaleRepGroup = require('./SaleReps/SaleRepGroup')(sequelize, Sequelize);
 db.SaleRepPlans = require('./SaleReps/SaleRepPlans')(sequelize, Sequelize);
