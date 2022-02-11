@@ -24,18 +24,33 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         isActive: {
-            type: Sequelize.BOOLEAN
-        },
-        CreatedDate: {
-            type: Sequelize.DATEONLY
-        },
-        UpdatedDate: {
-            type: Sequelize.DATEONLY
-        },
-        UID: {
             type: Sequelize.INTEGER
         },
+        CreatedDate: {
+            type: Sequelize.DATE
+        },
+        UpdatedDate: {
+            type: Sequelize.DATE
+        },
+        UID: {
+            type: Sequelize.STRING
+        },
         MustHaveSKUChannelID: {
+            type: Sequelize.INTEGER
+        },
+        channel: {
+            type: Sequelize.INTEGER
+        },
+        BuyingPower: {
+            type: Sequelize.INTEGER
+        },
+        Subchannel: {
+            type: Sequelize.INTEGER
+        },
+        LocationSegment: {
+            type: Sequelize.INTEGER
+        },
+        Image: {
             type: Sequelize.INTEGER
         }
     });

@@ -7,10 +7,10 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true
         },
         PricelistDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         CreatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         }
     });
 

@@ -17,13 +17,13 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN
         },
         CreatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         UpdatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         UID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         }
     });
     

@@ -22,7 +22,11 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: true
         },
         isActive: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.INTEGER,
+            allowNull: true
+        },
+        code: {
+            type: Sequelize.STRING,
             allowNull: true
         },
         UID: {
@@ -30,7 +34,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: true
         },
         CreatedDate: {
-            type: Sequelize.DATEONLY,
+            type: Sequelize.DATE,
             allowNull: true
         },
         Phone: {

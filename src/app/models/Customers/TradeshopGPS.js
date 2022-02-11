@@ -8,19 +8,19 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         Longitude: {
-            type: Sequelize.GEOGRAPHY
+            type: Sequelize.STRING
         },
         Latitude: {
-            type: Sequelize.GEOGRAPHY
+            type: Sequelize.STRING
         },
         CreatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         UpdatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         UID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         }
     });
 

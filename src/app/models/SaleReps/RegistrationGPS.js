@@ -8,10 +8,10 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         Longitude: {
-            type: Sequelize.GEOGRAPHY
+            type: Sequelize.STRING
         },
         Latitude: {
-            type: Sequelize.GEOGRAPHY
+            type: Sequelize.STRING
         },
         IMEI: {
             type: Sequelize.INTEGER

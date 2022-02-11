@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         PaymentDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         Amount: {
             type: Sequelize.INTEGER

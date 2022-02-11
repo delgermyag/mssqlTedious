@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         CreatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         }
     });
 

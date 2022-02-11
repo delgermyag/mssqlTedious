@@ -19,7 +19,7 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         CreatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         WarehouseID: {
             type: Sequelize.INTEGER,

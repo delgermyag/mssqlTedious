@@ -15,10 +15,10 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         StartDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         EndDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         }
     });
 

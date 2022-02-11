@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         UID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         }
     });
 

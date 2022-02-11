@@ -24,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN
         },
         createdDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         }
     });
 

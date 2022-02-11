@@ -5,6 +5,7 @@ module.exports = app => {
     router.get('/', users.findAll);
     router.post('/salerep', users.findBySaleRep);
     router.post('/idrequest', users.idRequest);
+    router.post('/paymentterms', users.paymentTerms);
 
     app.use('/api/salereps', router);
 };

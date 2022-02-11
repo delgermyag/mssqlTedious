@@ -21,10 +21,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         TargetByDay: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         ActualByDay: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         }
     });
 

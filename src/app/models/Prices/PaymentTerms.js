@@ -33,16 +33,16 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         isHierarchical: {
-            type: Sequelize.BOOLEAN
-        },
-        UID: {
             type: Sequelize.INTEGER
         },
+        UID: {
+            type: Sequelize.STRING
+        },
         CreatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         UpdateDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         }
     });
 

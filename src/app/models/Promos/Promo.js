@@ -18,10 +18,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         StartDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         EndDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         TreshholdAmount: {
             type: Sequelize.INTEGER
@@ -39,13 +39,13 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN
         },
         CreatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         UpdateDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         UID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         }
     });
 

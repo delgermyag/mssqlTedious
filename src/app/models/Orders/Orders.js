@@ -41,10 +41,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         DeliveryDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         CreatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         OperationID :{
             type: Sequelize.INTEGER
@@ -53,14 +53,18 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         UID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         Longitude: {
-            type: Sequelize.GEOGRAPHY
+            type: Sequelize.STRING
         },
         Latitude: {
-            type: Sequelize.GEOGRAPHY
+            type: Sequelize.STRING
         }
+    }, {
+        timestamps: false,
+        createdAt: false,
+        updatedAt: false
     });
 
     return Orders;

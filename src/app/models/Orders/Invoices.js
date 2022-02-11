@@ -25,13 +25,13 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         InvoiceDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         CreatedDate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.DATE
         },
         UID: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         }
     });
 

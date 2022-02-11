@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         createdate: {
-            type: Sequelize.STRING
+            type: Sequelize.DATE
         },
         status: {
             type: Sequelize.INTEGER

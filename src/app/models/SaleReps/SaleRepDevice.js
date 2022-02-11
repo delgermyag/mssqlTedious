@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.DATE
             },
             UpdatedDate: {
-                type: Sequelize.Date
+                type: Sequelize.DATE
             },
             isActive: {
                 type: Sequelize.INT
