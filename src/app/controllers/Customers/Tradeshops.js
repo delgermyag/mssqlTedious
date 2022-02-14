@@ -27,3 +27,20 @@ exports.findBySalerep = async (req, res) => {
         res.status(500).json({ message: err.message });
     };
 };
+
+exports.productBySalerep = async (req, res) => {
+    
+    const id = req.body.SaleRepID;
+
+    const tradeshop = await db.sequelize.query(`exec COLA.dbo.SP_TRADESHOPS 'productinfobysalerepid', ${id}, '', '', '' `, { type: QueryTypes.SELECT });
+
+    try {
+        if(tradeshop.length != 0) {
+            res.status(200).send(tradeshop);
+        } else {
+            res.status(404).json({ message: 'Product not found. Check Salerep ID.'});
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
+};
