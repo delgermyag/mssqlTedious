@@ -4,7 +4,9 @@ module.exports = app => {
 
     router.get('/', Tradeshops.findAll);
     router.post('/salerep', Tradeshops.findBySalerep);
-    router.post('/product', Tradeshops.productBySalerep);
+    router.post('/pricelist', Tradeshops.productBySalerep);
+    router.post('/product', Tradeshops.vgoodelements);
+    router.post('/residues', Tradeshops.getresidues);
 
     app.use('/api/tradeshops', router);
 }
