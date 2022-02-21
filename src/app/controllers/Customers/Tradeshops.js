@@ -106,3 +106,22 @@ exports.getresidues = async (req, res) => {
         res.status(500).json({ message: err.message });
     };
 };
+
+exports.musthavesku = async (req, res) => {
+
+    const salerep = req.body.salerepid;
+    const tradeshop = req.body.tradeshopid;
+    const date = req.body.lastupdatedate;
+
+    const sku = await db.sequelize.query(`exec COLA.dbo.SP_TRADESHOPS 'musthavesku', '${salerep}', '${tradeshop}', '${date}', '' `, { type: QueryTypes.SELECT });
+
+    try {
+        if(sku.length != 0) {
+            res.status(200).send(sku);
+        } else {
+            res.status(404).json({ message: 'SKU not found'});
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
+};
