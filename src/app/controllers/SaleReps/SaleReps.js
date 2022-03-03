@@ -1,15 +1,6 @@
 const { QueryTypes } = require('sequelize');
 const db = require('../../models');
-const SaleRep = db.SaleReps;
 
-exports.findAll = (req, res) => {
-
-    SaleRep.findAll().then(data => {
-        res.send(data)
-    }).catch(err => {
-        res.status(500).send({ message: err.message || 'Some error occured while finding saleReps.'});
-    });
-};
 
 exports.findBySaleRep = async (req, res) => {
     const id = req.body.deviceid;
@@ -114,4 +105,130 @@ exports.paymentTermsData = async (req, res) => {
     } catch(err) {
         res.status(500).json({ message: err.message });
     };
+};
+
+exports.pricelisthierarchical = async (req, res) => {
+    const salerep = req.body.salerepid;
+    const pltype = req.body.pltypeid;
+    const date = req.body.lastupdatedate;
+
+    if(salerep == '' || salerep == null) {
+        res.status(400).json({ message: "Please enter Salerep ID." });
+        return;
+    };
+    if(pltype == '' || pltype == null) {
+        res.status(400).json({ message: "Please enter Pricelist type ID."});
+        return;
+    };
+
+    try {
+        const pricelist = await db.sequelize.query(`exec COLA.dbo.SP_GETDATA_PRICELIST 'pricelisthierchical', '${salerep}', '${pltype}', '${date}', '', ''`, { type: QueryTypes.SELECT });
+
+        if(pricelist.length != 0) {
+            res.status(200).send(pricelist);
+        } else {
+            res.status(404).json({ message: "There is no data to show." });
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
+};
+
+exports.warehouse = async (req, res) => {
+    const salerep = req.body.salerepid;
+
+    if(salerep == '' || salerep == null) {
+        res.status(400).json({ message: "Please enter Salerep ID."});
+        return;
+    };
+
+    try {
+        const warehouse = await db.sequelize.query(`exec cola.dbo.[SP_SALEREPS] 'warehouse', '${salerep}', '', '', ''`, { type: QueryTypes.SELECT });
+
+        if(warehouse.length != 0) {
+            res.status(200).send(warehouse);
+        } else {
+            res.status(404).json({ message: "There is no data to show." });
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
+};
+
+exports.promos = async (req, res) => {
+    const salerepid = req.body.salerepid;
+    const tradeshopid = req.body.tradeshopid;
+    const lastupdatedate = req.body.lastupdatedate;
+
+    if(salerepid == '' || salerepid == null) {
+        res.status(400).json({ message: "Please enter Salerep ID." });
+        return;
+    };
+    if(tradeshopid == '' || tradeshopid == null) {
+        res.status(400).json({ message: "Please enter Tradeshop ID."});
+    };
+
+    try {
+        const promo = await db.sequelize.query(`exec cola.dbo.[SP_GETDATAPROMOS] 'promo', '${salerepid}', '${tradeshopid}', '${lastupdatedate}', '', ''`, { type: QueryTypes.SELECT });
+
+        if(promo.length != 0) {
+            res.status(200).send(promo);
+        } else {
+            res.status(404).json({ message: "There is no data to show." });
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+exports.promogiftproducts = async(req, res) => {
+    const salerepid = req.body.salerepid;
+    const tradeshopid = req.body.tradeshopid;
+    const lastupdatedate = req.body.lastupdatedate;
+
+    if(salerepid == '' || salerepid == null) {
+        res.status(400).json({ message: "Please enter Salerep ID." });
+        return;
+    };
+    if(tradeshopid == '' || tradeshopid == null) {
+        res.status(400).json({ message: "Please enter Tradeshop ID."});
+    };
+
+    try {
+        const promo = await db.sequelize.query(`exec cola.dbo.[SP_GETDATAPROMOS] 'promogiftproducts', '${salerepid}', '${tradeshopid}', '${lastupdatedate}', '', ''`, { type: QueryTypes.SELECT });
+
+        if(promo.length != 0) {
+            res.status(200).send(promo);
+        } else {
+            res.status(404).json({ message: "There is no data to show." });
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+exports.promoproducts = async(req, res) => {
+    const salerepid = req.body.salerepid;
+    const tradeshopid = req.body.tradeshopid;
+    const lastupdatedate = req.body.lastupdatedate;
+
+    if(salerepid == '' || salerepid == null) {
+        res.status(400).json({ message: "Please enter Salerep ID." });
+        return;
+    };
+    if(tradeshopid == '' || tradeshopid == null) {
+        res.status(400).json({ message: "Please enter Tradeshop ID."});
+    };
+
+    try {
+        const promo = await db.sequelize.query(`exec cola.dbo.[SP_GETDATAPROMOS] 'promoproducts', '${salerepid}', '${tradeshopid}', '${lastupdatedate}', '', ''`, { type: QueryTypes.SELECT });
+
+        if(promo.length != 0) {
+            res.status(200).send(promo);
+        } else {
+            res.status(404).json({ message: "There is no data to show." });
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    }
 };

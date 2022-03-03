@@ -23,6 +23,7 @@ db.sequelize.authenticate().then(() => {
 
 require('./app/routes/SaleReps')(app);
 require('./app/routes/Tradeshops')(app);
+require('./app/routes/Promos')(app);
 
 const PORT = 8080;
 app.listen(PORT, "0.0.0.0");

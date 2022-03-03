@@ -10,4 +10,4 @@ module.exports = app => {
     router.post('/musthavesku', Tradeshops.musthavesku);
 
     app.use('/api/tradeshops', router);
-}
+};
