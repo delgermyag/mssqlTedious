@@ -8,6 +8,7 @@ module.exports = app => {
     router.post('/product', Tradeshops.vgoodelements);
     router.post('/residues', Tradeshops.getresidues);
     router.post('/musthavesku', Tradeshops.musthavesku);
+    router.post('/rgbinfo', Tradeshops.rgbinfo);
 
     app.use('/api/tradeshops', router);
 };

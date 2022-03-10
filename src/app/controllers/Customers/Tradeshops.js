@@ -125,3 +125,18 @@ exports.musthavesku = async (req, res) => {
         res.status(500).json({ message: err.message });
     };
 };
+
+exports.rgbinfo = async (req, res) => {
+    
+    const rgb = await db.sequelize.query(`exec COLA.dbo.[SP_TRADESHOPS] 'rgbinfobygroupid','','','','' `, { type: QueryTypes.SELECT });
+
+    try {
+        if(rgb.length != 0) {
+            res.status(200).send(rgb);
+        } else {
+            res.status(404).json({ message: 'RGB info not found.'});
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
+};
