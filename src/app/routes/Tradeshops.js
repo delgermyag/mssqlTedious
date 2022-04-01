@@ -9,6 +9,7 @@ module.exports = app => {
     router.post('/residues', Tradeshops.getresidues);
     router.post('/musthavesku', Tradeshops.musthavesku);
     router.post('/rgbinfo', Tradeshops.rgbinfo);
+    router.post('/gps', Tradeshops.gpsUpd);
 
     app.use('/api/tradeshops', router);
 };

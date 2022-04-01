@@ -14,7 +14,10 @@ const sequelize = new Sequelize(dbconfig.DB, dbconfig.USER, dbconfig.PASSWORD, {
         min: dbconfig.pool.min,
         acquire: dbconfig.pool.acquire,
         idle: dbconfig.pool.idle
-    }
+    },
+    dialectOptions: {
+        multipleStatements: true
+    },
 });
 
 const db = {};

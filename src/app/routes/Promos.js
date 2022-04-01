@@ -5,6 +5,7 @@ module.exports = app => {
     router.post('/', products.promos);
     router.post('/products', products.promoproducts);
     router.post('/giftproducts', products.promogiftproducts);
+    router.post('/promocreate', products.promoCreate);
 
     app.use('/api/promo', router);
 };

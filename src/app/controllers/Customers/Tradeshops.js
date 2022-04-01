@@ -140,3 +140,22 @@ exports.rgbinfo = async (req, res) => {
         res.status(500).json({ message: err.message });
     };
 };
+
+exports.gpsUpd = async (req, res) => {
+
+    const tradeshop = req.body.tradeshopid;
+    const longitude = req.body.longitude;
+    const latitude = req.body.latitude;
+    
+    const gps = await db.sequelize.query(`exec COLA.dbo.SP_GPS_REG_UPD 'gpsregupd', ${tradeshop}, ${longitude}, ${latitude}`, { type: QueryTypes.UPDATE });
+
+    try {
+        if(gps.length != 0) {
+            res.status(200).send(gps);
+        } else {
+            res.status(401).json({ message: 'Unable to update tradeshop gps.'});
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
+};
