@@ -1,7 +1,6 @@
 const { QueryTypes } = require('sequelize');
 const db = require('../../models');
 
-
 exports.findBySaleRep = async (req, res) => {
     const id = req.body.deviceid;
 
@@ -35,6 +34,7 @@ exports.idRequest = async (req, res) => {
         res.status(404).json({ message: "Please enter htcode."});
         return;
     }
+
 
     try {
         const salerep = await db.sequelize.query(`exec COLA.dbo.SP_SALEREPS 'deviceidreq', '', ${id}, '', ${htcode} `, { type: QueryTypes.INSERT });

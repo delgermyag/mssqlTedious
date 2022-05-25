@@ -94,7 +94,7 @@ exports.getresidues = async (req, res) => {
         return;
     }
 
-    const residues = await db.sequelize.query(`EXEC COLA.DBO.SP_GETDATARESIDUES 'GETDATA', '${stockid}', '${article}' `)
+    const residues = await db.sequelize.query(`EXEC COLA.DBO.SP_GETDATARESIDUES 'GETDATA', '${stockid}', '${article}' `, { type: QueryTypes.SELECT });
 
     try {
         if(residues.length != 0) {
