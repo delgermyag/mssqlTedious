@@ -159,3 +159,28 @@ exports.gpsUpd = async (req, res) => {
         res.status(500).json({ message: err.message });
     };
 };
+
+exports.sudalgaa = async (req, res) => {
+
+    const tradeshop = req.body.tradeshopid;
+
+    if(tradeshop == '' || tradeshop == null) {
+        res.status(404).json({ message: 'Please enter tradeshopid' });
+        return;
+    }
+
+    const sudalgaa = await db.sequelize.query(`exec COLA.dbo.sp_sudalgaa 'sudalgaalist', ${tradeshop}, '', '', '', '', '', '', '', ''`, { type: QueryTypes.SELECT});
+
+    try {
+        if(sudalgaa.length != 0) {
+            res.status(200).send(sudalgaa);
+        } else {
+            res.status(401).json({ message: 'Unable to find tradeshop'});
+            return;
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+        return;
+    };
+
+};

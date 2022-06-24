@@ -40,15 +40,23 @@ exports.createOrder = async (req, res) => {
 
 exports.createOrderDetail = async(req, res) => {
 
+    const orderno = req.body.orderno;
+    const product = req.body.productid;
+    const producttype = req.body.producttype;
+    const quantity = req.body.quantity;
+    const price = req.body.price;
+    const amount = req.body.amount;
+    const baseprice = req.body.baseprice;
+    const orderpromo = req.body.orderpromoid;
+
+    const orderdetail = await db.sequelize.query(`EXEC COLA.DBO.SP_ORDERDETAIL_CREATE 'createdetail', '${orderno}', ${product}, '${producttype}', ${quantity}, ${price}, ${amount}, ${baseprice}, ${orderpromo}, ''`, { type: QueryTypes.SELECT });
+
     try {
-        for(var key in req.body){
-            if(req.body.hasOwnProperty(key)) {
-                    const orderdetail = await db.sequelize.query(`EXEC COLA.DBO.SP_ORDERDETAIL_CREATE 'createdetail', '${req.body.orderid}', '${req.body.productid}', '${req.body.producttype}', '${req.body.quantity}', '${req.body.price}', '${req.body.amount}', '${req.body.baseprice}', '${req.body.orderpromid}', ''`, { type: QueryTypes.RAW });
-                    res.status(200).send(orderdetail);
-            } else {
-                res.status(404).json({ message: "Order Detail couldn't be created. Please check your input."});
-                return;
-            }
+        if(orderdetail != null) {
+            res.status(200).send(orderdetail);
+        } else {
+            res.status(404).json({ message: "Order Detail couldn't be created. Please check your input."});
+            return;
         }
     } catch(err) {
         res.status(500).json({ message: err.message });
@@ -67,6 +75,86 @@ exports.updateOrder = async(req, res) => {
             res.status(200).send(updateOrder);
         } else {
             res.status(404).json({ message: "Couldn't update order. Please check order number."});
+            return;
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+        return;
+    };
+};
+
+exports.getOrder = async(req, res) => {
+
+    const salerep = req.body.salerepid;
+    const deliverydate = req.body.deliverydate;
+    const documentno = req.body.documentno;
+
+    const getOrder = await db.sequelize.query(`exec COLA.dbo.SP_GETDATA_ORDER 'getdataorder', ${salerep} , '${deliverydate}' , '${documentno}' , '' `, { type: QueryTypes.SELECT });
+
+    try {
+        if(getOrder != 0) {
+            res.status(200).send(getOrder);
+        } else {
+            res.status(404).json({ message: "Couldn't find order data." });
+            return;
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
+};
+
+exports.getOrderDetail = async(req, res) => {
+
+    const salerep = req.body.salerepid;
+    const deliverydate = req.body.deliverydate;
+    const documentno = req.body.documentno;
+
+    const getOrderDetail = await db.sequelize.query(`exec COLA.dbo.SP_GETDATA_ORDER 'getdataorderdtl', ${salerep} , '${deliverydate}' , '${documentno}' , '' `, { type: QueryTypes.SELECT });
+    
+    try {
+        if(getOrderDetail != 0) {
+            res.status(200).send(getOrderDetail);
+        } else {
+            res.status(404).json({ message: "Couldn't find order data." });
+            return;
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
+};
+
+exports.getInvoicePaymentData = async(req, res) => {
+
+    const salerep = req.body.salerepid;
+
+    const getInvoiceData = await db.sequelize.query(`EXEC COLA.DBO.SP_INVOICEPAYMENTS 'GETDATA', ${salerep},'','',''`, { type: QueryTypes.SELECT });
+
+    try {
+        if(getInvoiceData != 0) {
+            res.status(200).send(getInvoiceData);
+        } else {
+            res.status(404).json({ message: "Couldn't find Invoice Payment data." });
+            return;
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+        return;
+    };
+};
+
+exports.getInvoiceByCondition = async(req, res) => {
+
+    const salerep = req.body.salerepid;
+    const invdate = req.body.invdate;
+    const orderno = req.body.orderno;
+
+    const invoiceCondition = await db.sequelize.query(`EXEC COLA.DBO.SP_INVOICEPAYMENTS 'getdatabycondition',${salerep},'${invdate}', '${orderno}',''`, { type: QueryTypes.SELECT });
+
+    try {
+        if(invoiceCondition != 0) {
+            res.status(200).send(invoiceCondition);
+        } else {
+            res.status(404).json({ message: "Couldn't find Invoice Payment data." });
             return;
         }
     } catch(err) {

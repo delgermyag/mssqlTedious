@@ -9,7 +9,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     res.json({ message: 'Connected to app.'});
 });
@@ -25,7 +25,7 @@ require('./app/routes/SaleReps')(app);
 require('./app/routes/Tradeshops')(app);
 require('./app/routes/Promos')(app);
 require('./app/routes/Orders')(app);
-require('./app/routes/ApiData')(app);
+require('./app/routes/Products')(app);
 
-const PORT = 8080;
+const PORT = 8090;
 app.listen(PORT, "0.0.0.0");

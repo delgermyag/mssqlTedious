@@ -1,80 +1,64 @@
 const db = require("../../models");
+const Products = db.Products;
+const Op = db.Sequelize.Op;
 const { QueryTypes } = require('sequelize');
 
-exports.promos = async (req, res) => {
-    const salerepid = req.body.salerepid;
-    const tradeshopid = req.body.tradeshopid;
-    const lastupdatedate = req.body.lastupdatedate;
-
-    if(salerepid == '' || salerepid == null) {
-        res.status(400).json({ message: "Please enter Salerep ID." });
+exports.create = (req, res) => {
+    if(!req.body.ProductName) {
+        res.status(400).send({ message: "Field can't be empty."});
         return;
     };
-    if(tradeshopid == '' || tradeshopid == null) {
-        res.status(400).json({ message: "Please enter Tradeshop ID."});
+
+    const product = { 
+        ProductID: req.body.ProductID,
+        ProductGroupID: req.body.ProductGroupID,
+        ProductName: req.body.ProductName,
+        BarCode: req.body.BarCode,
+        inCase: req.body.inCase,
+        isActive: req.body.isActive,
+        createdDate: req.body.createdDate
     };
 
-    try {
-        const promo = await db.sequelize.query(`exec cola.dbo.[SP_GETDATAPROMOS] 'promo', '${salerepid}', '${tradeshopid}', '${lastupdatedate}', '', ''`, { type: QueryTypes.SELECT });
-
-        if(promo.length != 0) {
-            res.status(200).send(promo);
-        } else {
-            res.status(404).json({ message: "There is no data to show." });
-        }
-    } catch(err) {
-        res.status(500).json({ message: err.message });
-    }
+    Products.create(product).then(data => {
+        res.send(data)
+    }).catch(err => {
+        res.status(500).send({ message: err.message || "Error occured while creating Product."});
+    });
 };
 
-exports.promogiftproducts = async(req, res) => {
-    const salerepid = req.body.salerepid;
-    const tradeshopid = req.body.tradeshopid;
-    const lastupdatedate = req.body.lastupdatedate;
+exports.findAll = (req, res) => {
+    const name = req.body.ProductName;
+    const condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
 
-    if(salerepid == '' || salerepid == null) {
-        res.status(400).json({ message: "Please enter Salerep ID." });
-        return;
-    };
-    if(tradeshopid == '' || tradeshopid == null) {
-        res.status(400).json({ message: "Please enter Tradeshop ID."});
-    };
-
-    try {
-        const promo = await db.sequelize.query(`exec cola.dbo.[SP_GETDATAPROMOS] 'promogiftproducts', '${salerepid}', '${tradeshopid}', '${lastupdatedate}', '', ''`, { type: QueryTypes.SELECT });
-
-        if(promo.length != 0) {
-            res.status(200).send(promo);
-        } else {
-            res.status(404).json({ message: "There is no data to show." });
-        }
-    } catch(err) {
-        res.status(500).json({ message: err.message });
-    }
+    Products.findAll({ where: condition }).then(data => {
+        res.send(data)
+    }).catch(err => {
+        res.status(500).send({ message: err.message || 'Some error occured while finding Products.'});
+    });
 };
 
-exports.promoproducts = async(req, res) => {
-    const salerepid = req.body.salerepid;
-    const tradeshopid = req.body.tradeshopid;
-    const lastupdatedate = req.body.lastupdatedate;
+exports.findOne = (req, res) => {
+    const id = req.body.ProductID;
 
-    if(salerepid == '' || salerepid == null) {
-        res.status(400).json({ message: "Please enter Salerep ID." });
-        return;
-    };
-    if(tradeshopid == '' || tradeshopid == null) {
-        res.status(400).json({ message: "Please enter Tradeshop ID."});
-    };
+    Products.findByPk(id).then(data => {
+        res.send(data)
+    }).catch(err => {
+        res.status(500).send({ message: err.message || 'Some error occured while finding the Product.'});
+    });
+};
+
+exports.equipment = async(req, res) => {
 
     try {
-        const promo = await db.sequelize.query(`exec cola.dbo.[SP_GETDATAPROMOS] 'promoproducts', '${salerepid}', '${tradeshopid}', '${lastupdatedate}', '', ''`, { type: QueryTypes.SELECT });
+        const equipment = await db.sequelize.query(`exec SP_EQUIPMENT 'getdata','','','','','',''`, { type: QueryTypes.SELECT });
 
-        if(promo.length != 0) {
-            res.status(200).send(promo);
+        if(equipment.length != 0) {
+            res.status(200).send(equipment);
         } else {
             res.status(404).json({ message: "There is no data to show." });
         }
     } catch(err) {
         res.status(500).json({ message: err.message });
-    }
+    };
+
 };
