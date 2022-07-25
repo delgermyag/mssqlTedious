@@ -1,6 +1,5 @@
 const { QueryTypes } = require("sequelize");
 const db = require("../../models");
-const Orders = db.Orders;
 
 
 exports.createOrder = async (req, res) => {
@@ -40,6 +39,7 @@ exports.createOrder = async (req, res) => {
 
 exports.createOrderDetail = async(req, res) => {
 
+    /*
     const orderno = req.body.orderno;
     const product = req.body.productid;
     const producttype = req.body.producttype;
@@ -48,8 +48,20 @@ exports.createOrderDetail = async(req, res) => {
     const amount = req.body.amount;
     const baseprice = req.body.baseprice;
     const orderpromo = req.body.orderpromoid;
+    */
 
-    const orderdetail = await db.sequelize.query(`EXEC COLA.DBO.SP_ORDERDETAIL_CREATE 'createdetail', '${orderno}', ${product}, '${producttype}', ${quantity}, ${price}, ${amount}, ${baseprice}, ${orderpromo}, ''`, { type: QueryTypes.SELECT });
+    
+    var data = req.body;
+
+    data.forEach(async function(i) {
+        await db.sequelize.query(`EXEC COLA.DBO.SP_ORDERDETAIL_CREATE 'createdetail', '${i.orderno}', ${i.productid}, '${i.producttype}', ${i.quantity}, ${i.price}, ${i.amount}, ${i.baseprice}, ${i.orderpromoid}, ''`, { type: QueryTypes.SELECT });
+    });
+    
+    const documentno = data[0].orderno;
+
+    //const orderdetail = await db.sequelize.query(`EXEC COLA.DBO.SP_ORDERDETAIL_CREATE 'createdetail', '${orderno}', ${product}, '${producttype}', ${quantity}, ${price}, ${amount}, ${baseprice}, ${orderpromo}, ''`, { type: QueryTypes.SELECT });
+
+    const orderdetail = await db.sequelize.query(`EXEC COLA.DBO.SP_ORDERDETAIL_CREATE 'getorderdetail', '${documentno}', '', '', '', '', '', '', '', ''`, { type: QueryTypes.SELECT }); //added by Dalai 20220707
 
     try {
         if(orderdetail != null) {
@@ -162,3 +174,4 @@ exports.getInvoiceByCondition = async(req, res) => {
         return;
     };
 };
+
