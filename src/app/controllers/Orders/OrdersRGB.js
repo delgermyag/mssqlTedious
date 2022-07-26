@@ -43,7 +43,7 @@ exports.createRGBDetail = async( req, res) => {
     var data = req.body;
 
     data.forEach(async function(i) {
-        await db.sequelize.query(`exec COLA.dbo.SP_ORDERRGB 'createorderrgbdtl',N'${i.documentno}', '', '', '', ${i.article}, ${i.quantity}, ${i.price}, '',''`, { type: QueryTypes.SELECT });
+        await db.sequelize.query(`exec COLA.dbo.SP_ORDERRGB 'createorderrgbdtl',N'${i.documentno}', '', '', '', ${i.productid}, ${i.quantity}, ${i.price}, '',''`, { type: QueryTypes.SELECT });
     });
 
     const documentno = data[0].documentno;

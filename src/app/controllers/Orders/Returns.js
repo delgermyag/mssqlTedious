@@ -12,7 +12,7 @@ exports.createReturn = async(req, res) => {
     const returntypeid = req.body.returntypeid;
     const orderid = req.body.orderid;
 
-    const createReturn = await db.sequelize.query(`exec COLA.dbo.SP_RETURN_CREATE 'return_create', N'${returnno}', ${salerepid}, ${tradeshopid}, ${stockid}, '${documentdate}', ${paymenttermid},${returntypeid},${orderid},'',''`, { type: QueryTypes.SELECT });
+    const createReturn = await db.sequelize.query(`exec COLA.dbo.SP_RETURN_CREATE 'return_create', N'${returnno}', ${salerepid}, ${tradeshopid}, ${stockid}, '${documentdate}', ${paymenttermid},${returntypeid},N'${orderno}','',''`, { type: QueryTypes.SELECT });
 
     try {
         if(createReturn != 0) {
@@ -32,7 +32,7 @@ exports.createReturnDtl = async( req, res) => {
     var data = req.body;
 
     data.forEach(async function(i) {
-        await db.sequelize.query(`exec COLA.dbo.SP_RETURNDETAILS_CREATE 'returndtl_create',N'${i.returnno}',  ${i.article}, ${i.quantity}, ${i.price}, ${i.returnreasonid},'',''`, { type: QueryTypes.SELECT });
+        await db.sequelize.query(`exec COLA.dbo.SP_RETURNDETAILS_CREATE 'returndtl_create',N'${i.returnno}',  ${i.productid}, ${i.quantity}, ${i.price}, ${i.returnreasonid},'',''`, { type: QueryTypes.SELECT });
     });
 
     const returnno = data[0].returnno;
@@ -54,3 +54,35 @@ exports.createReturnDtl = async( req, res) => {
     };
 };
 
+
+exports.returnType = async(req, res) => {
+    const returntype = await db.sequelize.query(`exec COLA.dbo.SP_RETURN_CREATE 'returntype', N'', '','', '', '','', '', '','',N''`, { type: QueryTypes.SELECT });
+
+    try {
+        if(returntype.length != 0) {
+            res.status(200).send(returntype);
+        } else {
+            res.status(404).json({ message: "Couldn't select ReturnTypes." });
+            return;
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
+    
+};
+
+exports.returnReason = async(req, res) => {
+    const returnreason = await db.sequelize.query(`exec COLA.dbo.SP_RETURN_CREATE 'returnreason', N'', '','', '', '','', '', '','',N''`, { type: QueryTypes.SELECT });
+
+    try {
+        if(returnreason.length != 0) {
+            res.status(200).send(returnreason);
+        } else {
+            res.status(404).json({ message: "Couldn't select ReturnReason." });
+            return;
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    };
+    
+};
